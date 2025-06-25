@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { INewUserData } from "../../types/types";
-import { registerUser } from "../../api/services/authorization";
+import { registerUser } from "../../api/services/authService";
 
 export const RegForm = () => {
   const [formData, setFormData] = useState<INewUserData>({
@@ -10,8 +10,8 @@ export const RegForm = () => {
     confirmPassword: "",
   });
 
-  const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,8 +19,6 @@ export const RegForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setMessage(null);
-    setError(null);
 
     try {
       const responseStatus = await registerUser(formData);
@@ -35,6 +33,9 @@ export const RegForm = () => {
       } else {
         setError("Unknown error");
       }
+    } finally {
+      setMessage("");
+      setError("");
     }
   };
 
@@ -69,7 +70,7 @@ export const RegForm = () => {
         required
       />
 
-      <button type="submit">Submit</button>
+      <button type="submit">Create account</button>
       {message && <p>{message}</p>}
       {error && <p>{error}</p>}
     </form>

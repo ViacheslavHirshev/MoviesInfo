@@ -1,11 +1,20 @@
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { useAppSelector } from "./store/hooks";
 import { MainPage } from "./pages/MainPage/MainPage";
+import { Logo } from "./components/Logo/Logo";
+import { Header } from "./components/Header/Header";
 
-function App() {
+const App = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
-  return <>{!isLoggedIn ? <AuthPage /> : <MainPage />}</>;
-}
+  return (
+    <>
+      <Header>
+        <Logo value="Movies" />
+      </Header>
+      {isLoggedIn ? <MainPage /> : <AuthPage />}
+    </>
+  );
+};
 
 export default App;

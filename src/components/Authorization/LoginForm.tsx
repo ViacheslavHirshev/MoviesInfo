@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { IUserData } from "../../types/types";
 import { useAppDispatch } from "../../store/hooks";
-import { loginUser } from "../../api/services/authorization";
+import { loginUser } from "../../api/services/authService";
 import { setToken } from "../../store/features/auth";
 
 export const LoginForm = () => {
@@ -22,12 +22,13 @@ export const LoginForm = () => {
     const token = await loginUser(formData);
     if (token) {
       dispatch(setToken(token));
+      localStorage.setItem("token", token);
       // console.log(token);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
       <input
         name="email"
         placeholder="email"

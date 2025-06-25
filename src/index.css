@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+
+.reg-form,
+.login-form,
+.new-movie-form {
+  max-width: 400px;
+  min-width: 200px;
+  width: 100%;
+  margin-top: 15%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reg-form input,
+.login-form input {
+  border-radius: 15px;
+  padding: 0.5rem;
+}
+
+.auth-page {
+  height: 90vh;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.main-page-container {
+  height: 90vh;
+  padding: 2rem;
+
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.movies-box {
+  border: 1px solid black;
+  width: 100%;
+  max-width: 500px;
+  max-height: 700px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-self: end;
+}
+
+.movies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.movies-list li {
+  border-bottom: 1px solid gray;
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+}
+
+.movies-list div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.movies-list div p {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 5%;
+}

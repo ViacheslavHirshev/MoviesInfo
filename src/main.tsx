@@ -12,3 +12,8 @@ createRoot(document.getElementById("root")!).render(
     </Provider>
   </StrictMode>
 );
+
+// TODO: Sorting by alphabetic order
+// TODO: Searching by author and by title
+// TODO: Make it more beautiful
+// TODO: Refactoring(smth atleast)
