@@ -1,44 +1,82 @@
-import { useEffect, useState } from "react";
-// import { IMovie } from "../../types/types";
-import { getMovieById } from "../../api/services/moviesService";
+import { SetStateAction, useEffect, useState } from "react";
+import {
+  deleteMovieById,
+  getMovieById,
+} from "../../api/services/moviesService";
 import { Loader } from "../Loader";
 import { ErrorMessage } from "../ErrorMessage";
+import { IMovie } from "../../types/types";
+import { setIsDeletionOccured } from "../../store/features/movies";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 interface MovieDetailsProps {
-  selectedMovieId: number;
+  selectedId: number;
+  setSelectedId: React.Dispatch<SetStateAction<number | null>>;
 }
 
-export const MovieDetails = ({ selectedMovieId }: MovieDetailsProps) => {
+export const MovieDetails = ({
+  selectedId,
+  setSelectedId,
+}: MovieDetailsProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  //   const [selectedMovieData, setSelectedMovieData] = useState<IMovie>();
+  const [selectedMovieData, setSelectedMovieData] = useState<IMovie>();
+
+  const dispatch = useAppDispatch();
+  const isDeletionOccured = useAppSelector(
+    (state) => state.movies.isDeletionOccured
+  );
+
+  const actors = selectedMovieData?.actors
+    .map((actor) => actor.name.trim())
+    .join(", ");
 
   useEffect(() => {
-    setIsLoading(true);
     const getSelectedMovie = async () => {
       try {
-        const data = await getMovieById(selectedMovieId);
-        console.log(data);
+        setError("");
+        setIsLoading(true);
+        
+        const data = await getMovieById(selectedId);
+        setSelectedMovieData(data);
       } catch (err) {
         if (err instanceof Error) {
           setError("Error: " + err.message);
         } else {
-          setError("Unknown error");
+          console.log("Unknown error: ", err);
         }
       } finally {
         setIsLoading(false);
-        setError("");
       }
     };
 
     getSelectedMovie();
-  }, [selectedMovieId]);
+  }, [selectedId]);
+
+  const deleteMovieHandler = async () => {
+    const response = await deleteMovieById(selectedId);
+    console.log(response);
+    if (response === 1) {
+      dispatch(setIsDeletionOccured(!isDeletionOccured));
+      setSelectedId(null);
+    }
+  };
 
   return (
-    <div>
+    <>
       {error && <ErrorMessage message={error} />}
       {!error && isLoading && <Loader />}
-      {!error && !isLoading && <h3>Movie details fetched</h3>}
-    </div>
+      {!error && !isLoading && (
+        <div className="movie-details">
+          <h3>{selectedMovieData?.title}</h3>
+          <p className="movie-details-year">📅 {selectedMovieData?.year}</p>
+          <p className="movie-details-format">
+            Format: {selectedMovieData?.format}
+          </p>
+          <p className="movie-details-actors">Actors: {actors}</p>
+          <button onClick={deleteMovieHandler}>Delete movie</button>
+        </div>
+      )}
+    </>
   );
 };

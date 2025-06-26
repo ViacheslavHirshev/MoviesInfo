@@ -1,1 +1,0 @@
-export { NewMovieForm } from "./NewMovieForm";

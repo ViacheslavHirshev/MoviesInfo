@@ -7,9 +7,17 @@ export const moviesApi = axios.create({
 });
 
 moviesApi.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = token;
-  // console.log("Token from local storage: " + token);
+  const token = sessionStorage.getItem("token");
+  const expire = sessionStorage.getItem("token_exp");
+
+  if (token && expire && Date.now() < Number(expire)) {
+    config.headers.Authorization = token;
+  } else {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("token_exp");
+
+    alert("Token expired, refresh page and login again");
+  }
 
   return config;
 });

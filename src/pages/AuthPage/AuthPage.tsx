@@ -1,4 +1,4 @@
-import { LoginForm, RegForm } from "../../components/Authorization";
+import { LoginForm, RegForm } from "../../components/Forms";
 
 export const AuthPage = () => {
   return (

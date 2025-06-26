@@ -31,3 +31,5 @@ export interface INewUserData extends IUserData {
   name: string;
   confirmPassword: string;
 }
+
+export type TSortOption = "default" | "alphabetical";

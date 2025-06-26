@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { IUserData } from "../../types/types";
 import { useAppDispatch } from "../../store/hooks";
 import { loginUser } from "../../api/services/authService";
-import { setToken } from "../../store/features/auth";
+import { setIsLoggedIn } from "../../store/features/auth";
 
 export const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +21,10 @@ export const LoginForm = () => {
 
     const token = await loginUser(formData);
     if (token) {
-      dispatch(setToken(token));
-      localStorage.setItem("token", token);
-      // console.log(token);
+      sessionStorage.setItem("token", token);
+      const expireTimeStamp = Date.now() + 12 * 60 * 60 * 1000;
+      sessionStorage.setItem("token_exp", expireTimeStamp.toString());
+      dispatch(setIsLoggedIn(true));
     }
   };
 

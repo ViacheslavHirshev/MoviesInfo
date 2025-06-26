@@ -6,10 +6,12 @@
 
 header {
   height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-bottom: 1px solid gray;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
 }
 
 .reg-form,
@@ -44,19 +46,24 @@ header {
   padding: 2rem;
 
   display: grid;
-  gap: 1.5rem;
+  gap: 3rem;
   grid-template-columns: repeat(2, 1fr);
   justify-items: center;
 }
+
+/* ************** */
+/* ************** */
 
 .movies-box {
   border: 1px solid black;
   width: 100%;
   max-width: 500px;
   max-height: 700px;
+  padding: 1rem;
 
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 
   justify-self: end;
 }
@@ -66,8 +73,9 @@ header {
   flex-direction: column;
   gap: 1rem;
 
-  padding-top: 2rem;
+  padding-top: 0.5rem;
   width: 100%;
+  overflow: auto;
 }
 
 .movies-list li {
@@ -94,4 +102,41 @@ header {
 .delete-btn {
   position: absolute;
   right: 5%;
+}
+
+.add-btn {
+  width: 100%;
+  height: 2rem;
+}
+
+/* ************** */
+/* ************** */
+
+.movie-details-box {
+  border: 1px solid black;
+  width: 100%;
+  max-width: 500px;
+  max-height: 300px;
+  padding: 2rem;
+
+  justify-self: start;
+}
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.movie-details-box h3 {
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.movie-details-year {
+  align-self: center;
+}
+
+.movie-details-format {
+  align-self: center;
 }
