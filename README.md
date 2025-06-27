@@ -10,7 +10,7 @@ A frontend application for browsing, adding, deleting, and sorting movies. Built
 -  CSS with custom variables
 -  Docker
 -  NGINX (for production image)
-
+```plaintext
 ## 📁 Project Structure
 MoviesInfo/
 ├── src/
@@ -30,7 +30,7 @@ MoviesInfo/
 │   ├── index.css
 │   ├── main.tsx
 │   ├── vite-env.d.ts
-
+```
 ## ⚙️ Running in Development Mode
 
 > Prerequisites: `Node.js`, `npm`, and `Docker` installed.
