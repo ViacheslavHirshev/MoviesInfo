@@ -83,7 +83,13 @@ export const NewMovieForm = ({ setIsAddingMovie }: NewMovieFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="new-movie-form">
-      <button onClick={() => setIsAddingMovie((prev) => !prev)}>X</button>
+      <button
+        className="close-form-btn"
+        onClick={() => setIsAddingMovie((prev) => !prev)}
+      >
+        X
+      </button>
+
       <input
         name="title"
         placeholder="title"
@@ -124,7 +130,9 @@ export const NewMovieForm = ({ setIsAddingMovie }: NewMovieFormProps) => {
         required
       />
 
-      <button type="submit">Add new movie</button>
+      <button className="add-movie-btn" type="submit">
+        Add new movie
+      </button>
       {message && <p>{message}</p>}
     </form>
   );

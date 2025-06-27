@@ -3,7 +3,7 @@ import { importMovies } from "../../api/services/moviesService";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setIsAddingOccured } from "../../store/features/movies";
 
-export const MoviesImport = () => {
+export const MoviesImport = ({ className = "" }: { className?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<string | null>("");
   const [file, setFile] = useState<File | null>();
@@ -52,7 +52,7 @@ export const MoviesImport = () => {
   };
 
   return (
-    <div className="movies-import">
+    <div className={className}>
       <input type="file" accept=".txt" onChange={onFileChange} />
       <button disabled={isLoading} onClick={onImport}>
         {isLoading ? "Importing..." : "Import"}

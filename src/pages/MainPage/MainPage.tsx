@@ -17,32 +17,37 @@ export const MainPage = () => {
   const [isAddingMovie, setIsAddingMovie] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const [query, setQuery] = useState(" ");
+  const [query, setQuery] = useState("");
   const [sortOption, setSortOption] = useState<TSortOption>("default");
 
   return (
     <>
       <Header>
         <Logo value="Movies Info" />
-        <SearchBar value={query} setValue={setQuery} />
-        <SortOption value={sortOption} setValue={setSortOption} />
+        <SearchBar value={query} setValue={setQuery} className="search-bar" />
+        <SortOption
+          value={sortOption}
+          setValue={setSortOption}
+          className="sort-option"
+        />
       </Header>
 
       <Main>
         <Box className="movies-box">
-          <Box>
+          <Box className="add-movie-options">
             <CustomButton
               value={isAddingMovie ? "Return" : "Add movie"}
               className="add-btn"
               onClickHandler={() => setIsAddingMovie(!isAddingMovie)}
             />
-            <MoviesImport />
+            <MoviesImport className="movies-import" />
           </Box>
           <MoviesList
             setSelectedId={setSelectedId}
             selectedId={selectedId}
             query={query}
             sortOption={sortOption}
+            className="movies-list"
           />
         </Box>
 

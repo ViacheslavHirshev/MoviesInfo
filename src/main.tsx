@@ -15,3 +15,4 @@ createRoot(document.getElementById("root")!).render(
 
 // TODO: Make it more beautiful
 // TODO: Refactoring(smth atleast)
+// Login and reg form validation

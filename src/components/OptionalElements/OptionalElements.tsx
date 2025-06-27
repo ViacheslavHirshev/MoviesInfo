@@ -4,11 +4,18 @@ import { TSortOption } from "../../types/types";
 interface SearchBarProps {
   value: string;
   setValue: React.Dispatch<SetStateAction<string>>;
+  className?: string;
 }
-export const SearchBar = ({ value, setValue }: SearchBarProps) => {
+
+export const SearchBar = ({
+  value,
+  setValue,
+  className = "",
+}: SearchBarProps) => {
   return (
     <input
-      className="searchbar"
+      className={className}
+      placeholder="Movie name or Actor name"
       type="search"
       value={value}
       onChange={(e) => setValue(e.target.value)}
@@ -17,12 +24,13 @@ export const SearchBar = ({ value, setValue }: SearchBarProps) => {
 };
 
 interface CustomButtonProps {
-  className: string;
+  className?: string;
   onClickHandler: () => void;
   value: string;
 }
+
 export const CustomButton = ({
-  className,
+  className = "",
   onClickHandler,
   value,
 }: CustomButtonProps) => {
@@ -36,10 +44,17 @@ export const CustomButton = ({
 interface SortOptionProps {
   value: TSortOption;
   setValue: React.Dispatch<SetStateAction<TSortOption>>;
+  className?: string;
 }
-export const SortOption = ({ value, setValue }: SortOptionProps) => {
+
+export const SortOption = ({
+  value,
+  setValue,
+  className = "",
+}: SortOptionProps) => {
   return (
     <select
+      className={className}
       value={value}
       onChange={(e) => setValue(e.target.value as TSortOption)}
     >

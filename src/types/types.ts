@@ -33,3 +33,8 @@ export interface INewUserData extends IUserData {
 }
 
 export type TSortOption = "default" | "alphabetical";
+
+export interface IRegResponse {
+  token: string;
+  status: number;
+}

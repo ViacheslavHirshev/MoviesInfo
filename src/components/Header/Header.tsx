@@ -5,5 +5,5 @@ interface HeaderProps {
 }
 
 export const Header = ({ children }: HeaderProps) => {
-  return <header>{children}</header>;
+  return <header className="main-header">{children}</header>;
 };

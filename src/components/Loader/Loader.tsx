@@ -1,3 +1,3 @@
 export const Loader = () => {
-  return <h2>Loading...</h2>;
+  return <h2 className="loader">Loading...</h2>;
 };

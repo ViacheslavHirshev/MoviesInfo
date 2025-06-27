@@ -1,10 +1,11 @@
+import { Box } from "../../components/Box";
 import { LoginForm, RegForm } from "../../components/Forms";
 
 export const AuthPage = () => {
   return (
-    <div className="auth-page">
+    <Box className="auth-page">
       <RegForm />
       <LoginForm />
-    </div>
+    </Box>
   );
 };

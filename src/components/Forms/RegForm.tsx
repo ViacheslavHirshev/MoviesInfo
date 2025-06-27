@@ -19,23 +19,36 @@ export const RegForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setMessage("");
+    setError("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("❌Passwords do not match");
+      return;
+    }
 
     try {
-      const responseStatus = await registerUser(formData);
-      if (responseStatus === 1) {
+      const response = await registerUser(formData);
+      // console.log(response);
+
+      if (response.status === 1) {
         setMessage("Registration succesfull ✅");
       } else {
-        setMessage("Already registered ⚠️");
+        setMessage("Registration failed ⚠️");
       }
-    } catch (err: unknown) {
+    } catch (err) {
       if (err instanceof Error) {
-        setError("Error ❌: " + err.message);
+        setError("❌Error: " + err.message);
       } else {
         setError("Unknown error");
       }
     } finally {
-      setMessage("");
-      setError("");
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     }
   };
 
@@ -46,9 +59,11 @@ export const RegForm = () => {
         placeholder="name"
         value={formData.name}
         onChange={handleChange}
+        pattern="^[A-Za-z ]*$"
         required
       />
       <input
+        type="email"
         name="email"
         placeholder="email"
         value={formData.email}
@@ -56,17 +71,21 @@ export const RegForm = () => {
         required
       />
       <input
+        type="password"
         name="password"
         placeholder="password"
         value={formData.password}
         onChange={handleChange}
+        pattern="^[A-Za-z\d]{4,}$"
         required
       />
       <input
+        type="password"
         name="confirmPassword"
         placeholder="Confirm password"
         value={formData.confirmPassword}
         onChange={handleChange}
+        pattern="^[A-Za-z\d]{4,}$"
         required
       />
 

@@ -19,12 +19,15 @@ interface MoviesListProps {
   setSelectedId: React.Dispatch<SetStateAction<number | null>>;
   query: string;
   sortOption: TSortOption;
+  className?: string;
 }
+
 export const MoviesList = ({
   selectedId,
   setSelectedId,
   query,
   sortOption,
+  className = "",
 }: MoviesListProps) => {
   const dispatch = useAppDispatch();
 
@@ -113,7 +116,7 @@ export const MoviesList = ({
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <ul className="movies-list" onClick={handleSelectMovie}>
+    <ul className={className} onClick={handleSelectMovie}>
       {sortOption === "alphabetical"
         ? movies
             .slice()
@@ -123,7 +126,6 @@ export const MoviesList = ({
                 key={movie.id}
                 id={movie.id}
                 title={movie.title}
-                year={movie.year}
                 listPosition={i + 1}
                 setSelectedId={setSelectedId}
                 selectedId={selectedId}
@@ -134,7 +136,6 @@ export const MoviesList = ({
               key={movie.id}
               id={movie.id}
               title={movie.title}
-              year={movie.year}
               listPosition={i + 1}
               setSelectedId={setSelectedId}
               selectedId={selectedId}
@@ -147,22 +148,16 @@ export const MoviesList = ({
 interface MovieProps {
   id: number;
   title: string;
-  year: number;
   listPosition: number;
   selectedId: number | null;
   setSelectedId: React.Dispatch<SetStateAction<number | null>>;
 }
-const Movie = ({ id, title, year, listPosition }: MovieProps) => {
+
+const Movie = ({ id, title, listPosition }: MovieProps) => {
   return (
     <li data-id={id}>
       <div>{listPosition}</div>
-      <div>
-        <h3>{title}</h3>
-        <p>
-          <span>📅</span>
-          <span>{year}</span>
-        </p>
-      </div>
+      <h3>{title}</h3>
     </li>
   );
 };
