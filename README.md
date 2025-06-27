@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+# MoviesInfo
+A frontend application for browsing, adding, deleting, and sorting movies. Built with Vite + React + TypeScript using Redux Toolkit and Axios. The API endpoint is configurable via environment variables to support deployment flexibility.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Technologies Used
+-  React
+-  TypeScript
+-  Vite
+-  Redux Toolkit
+-  Axios
+-  CSS with custom variables
+-  Docker
+-  NGINX (for production image)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Project Structure
+MoviesInfo/
+├── src/
+│   ├── api/
+│   ├── assets/
+│   ├── components/
+│   │   ├── Forms/
+│   │   ├── MovieDetails/
+│   │   ├── MoviesImport/
+│   │   ├── MoviesList/
+│   │   ├── OptionalElements/
+│   │   ├── ...
+│   ├── pages/
+│   ├── store/
+│   └── types/
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── vite-env.d.ts
 
-## Expanding the ESLint configuration
+## ⚙️ Running in Development Mode
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+> Prerequisites: `Node.js`, `npm`, and `Docker` installed.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Run the backend server:
+```powershell
+docker run --name movies -p 8000:8000 webbylabhub/movies
+```
+2. Copy the repository
+3. Install dependencies
+```powershell
+npm i
+```
+4. Create .env.local at the root of your project
+```env
+VITE_API_URL=endpoint_url
+```
+5.  Run the development server
+```powershell
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🐳 Running via Docker
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. Start the backend container
+```powershell
+docker run --name movies -p 8000:8000 webbylabhub/movies
+```
+2. Run frontend Docker container
+```powershell
+docker run --rm -p 3000:80 -e API_URL=http://localhost:8000/api/v1 viacheslavhirshev/movies
 ```
