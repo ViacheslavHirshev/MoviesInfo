@@ -1,8 +1,6 @@
 # MoviesInfo
 A frontend application for browsing, adding, deleting, and sorting movies. Built with Vite + React + TypeScript using Redux Toolkit and Axios. The API endpoint is configurable via environment variables to support deployment flexibility.
 
----
-
 ## Technologies Used
 -  React
 -  TypeScript
