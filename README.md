@@ -10,8 +10,9 @@ A frontend application for browsing, adding, deleting, and sorting movies. Built
 -  CSS with custom variables
 -  Docker
 -  NGINX (for production image)
-```plaintext
+
 ## 📁 Project Structure
+```plaintext
 MoviesInfo/
 ├── src/
 │   ├── api/
